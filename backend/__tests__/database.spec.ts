@@ -3,7 +3,7 @@ dotenv.config();
 
 import pool from "../src/database";
 
-describe("database queries", () => {
+describe("database single queries", () => {
 	it("returns 10 when queries to 'SELECT 10;'", (done) => {
 		pool.query("SELECT 10;", (err, res) => {
 			if (err) return done(err);
