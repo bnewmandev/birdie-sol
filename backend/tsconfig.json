@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+		"lib": ["ESNext"],
+		"target": "ES2015",
+		"outDir": "./lib",
+		"removeComments": true,
+		"inlineSourceMap": true,
+		"inlineSources": true,
+		"preserveConstEnums": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"esModuleInterop": true,
+		"types": ["jest"]
+	},
+	"include": ["src/**/*", "**/*.spec.ts"],
+	"exclude": ["node_modules"]
+}
