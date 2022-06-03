@@ -11,18 +11,21 @@ const userValidation = async (recipientId: string): Promise<ValidateUserResponse
 			});
 		});
 	}
-	let request = `/validateUser?id=${recipientId}`;
+	let request = `/validateUser?id=${recipientId.substring(1)}`;
 	if (process.env.NODE_ENV === "development") {
 		request = `http://localhost:8000/validateUser?id=${recipientId}`;
 	}
 
 	const recipientData = await axios.get(request);
 
+	console.log(request);
+	console.log(recipientData.data);
+
 	if (recipientData.data.code === 200) {
 		return {
 			isAnyEntry: true,
 			isIdValid: true,
-			response: recipientData.data.id,
+			response: "Recipient: " + recipientData.data.recipientId,
 		};
 	} else if (recipientData.data.code === 404) {
 		return new Promise<ValidateUserResponse>((res, rej) => {

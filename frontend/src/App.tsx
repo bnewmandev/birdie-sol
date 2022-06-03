@@ -4,10 +4,7 @@ import "./App.scss";
 
 import Calender from "./components/Calendar";
 import data from "./mocks/data";
-import checkRecipientExists from "./services/userValidation";
-
-let recipient = window.location.pathname;
-recipient = recipient.substring(-1);
+import userValidation from "./services/userValidation";
 
 export default function App() {
 	const [recipientData, updateRecipientData] = useState({
@@ -17,12 +14,23 @@ export default function App() {
 	});
 	const [recipientId, setRecipientId] = useState("");
 
+	const fetchData = () => {
+		let recipient = window.location.pathname;
+		recipient = recipient.substring(-1);
+		console.log(recipient);
+		userValidation(recipient)
+			.then((res) => {
+				console.log(res);
+				updateRecipientData(res);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
+
 	useEffect(() => {
-		const data = checkRecipientExists(recipient);
-		data.then((res) => {
-			updateRecipientData(res);
-		});
-	}, [recipientData.response]);
+		fetchData();
+	}, []);
 
 	const events = data.events;
 
