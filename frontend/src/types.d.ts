@@ -21,3 +21,8 @@ export interface ValidateUserResponse {
 	isIdValid: boolean;
 	response: string;
 }
+
+export interface CalendarProps {
+	events?: CalenderEvent[];
+	defaultDate?: Date;
+}
