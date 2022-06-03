@@ -11,9 +11,10 @@ const userValidation = async (recipientId: string): Promise<ValidateUserResponse
 			});
 		});
 	}
-	let request = `/validateUser?id=${recipientId.substring(1)}`;
+	let id = recipientId.substring(1);
+	let request = `/validateUser?id=${id}`;
 	if (process.env.NODE_ENV === "development") {
-		request = `http://localhost:8000/validateUser?id=${recipientId}`;
+		request = `http://localhost:8000/validateUser?id=${id}`;
 	}
 
 	const recipientData = await axios.get(request);

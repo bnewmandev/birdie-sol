@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import "./App.scss";
 
 import Calender from "./components/Calendar";
-import data from "./mocks/data";
+import fetchEvents from "./services/fetchEvents";
 import userValidation from "./services/userValidation";
+import { CalenderEvent } from "./types";
 
 export default function App() {
 	const [recipientData, updateRecipientData] = useState({
@@ -12,14 +13,20 @@ export default function App() {
 		isIdValid: false,
 		response: "No Recipient Selected",
 	});
-	const [recipientId, setRecipientId] = useState("");
+	const [events, setEvents] = useState([] as CalenderEvent[]);
+	const [date, setDate] = useState(new Date());
 
 	const fetchData = () => {
 		let recipient = window.location.pathname;
-		recipient = recipient.substring(-1);
 		userValidation(recipient)
 			.then((res) => {
 				updateRecipientData(res);
+				if (res.isIdValid) {
+					fetchEvents(recipient).then((res) => {
+						setEvents(res.events);
+						setDate(res.lastEventDate);
+					});
+				}
 			})
 			.catch((err) => {
 				console.error(err);
@@ -30,14 +37,12 @@ export default function App() {
 		fetchData();
 	}, []);
 
-	const events = data.events;
-
 	return (
 		<div className="container">
 			<header className="w3-container w3-indigo">
 				<h1>{recipientData.response}</h1>
 			</header>
-			<Calender events={events} />
+			<Calender events={events} defaultDate={date} />
 		</div>
 	);
 }
