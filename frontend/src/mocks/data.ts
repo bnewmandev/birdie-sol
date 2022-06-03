@@ -18,6 +18,22 @@ const data = {
 			end: addHours(new Date(), 3),
 			color: "green",
 		},
+		{
+			id: 2,
+			title: "Visit Completed",
+			allDay: false,
+			start: addHours(new Date(), 4),
+			end: addHours(new Date(), 4),
+			color: "orange",
+		},
+		{
+			id: 3,
+			title: "Concern Raised",
+			allDay: false,
+			start: addHours(new Date(), 48),
+			end: addHours(new Date(), 48),
+			color: "red",
+		},
 	],
 	recipients: [
 		"df50cac5-293c-490d-a06c-ee26796f850d",

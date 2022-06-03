@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import "./App.scss";
 
-import Calender from "./components/Calender";
+import Calender from "./components/Calendar";
+import data from "./mocks/data";
 import checkRecipientExists from "./services/userValidation";
 
 let recipient = window.location.pathname;
@@ -23,12 +24,14 @@ export default function App() {
 		});
 	}, [recipientData.response]);
 
+	const events = data.events;
+
 	return (
 		<div className="container">
 			<header className="w3-container w3-indigo">
 				<h1>{recipientData.response}</h1>
 			</header>
-			<Calender />
+			<Calender events={events} />
 		</div>
 	);
 }

@@ -12,18 +12,18 @@ import { useSelector } from "react-redux";
 
 const localizer = momentLocalizer(moment);
 
-const MyCalendar = ({ date }: CalendarProps) => {
-	const eventArray = useSelector(selectEvents);
+const MyCalendar = ({ defaultDate, events = [] }: CalendarProps) => {
+	// const eventArray = useSelector(selectEvents);
 
 	return (
 		<div className="w3-container w3-margin-top">
 			<Calendar
 				localizer={localizer}
-				events={eventArray}
-				date={date}
+				events={events}
+				defaultDate={defaultDate}
 				startAccessor="start"
 				endAccessor="end"
-				style={{ height: 500 }}
+				style={{ height: "90vh" }}
 				eventPropGetter={(event: CalenderEvent, start, end, isSelected) => ({
 					event,
 					start,
