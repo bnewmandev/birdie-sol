@@ -17,10 +17,8 @@ export default function App() {
 	const fetchData = () => {
 		let recipient = window.location.pathname;
 		recipient = recipient.substring(-1);
-		console.log(recipient);
 		userValidation(recipient)
 			.then((res) => {
-				console.log(res);
 				updateRecipientData(res);
 			})
 			.catch((err) => {

@@ -18,9 +18,6 @@ const userValidation = async (recipientId: string): Promise<ValidateUserResponse
 
 	const recipientData = await axios.get(request);
 
-	console.log(request);
-	console.log(recipientData.data);
-
 	if (recipientData.data.code === 200) {
 		return {
 			isAnyEntry: true,
