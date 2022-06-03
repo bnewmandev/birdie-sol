@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import "./App.scss";
 
-import "./App";
+import Calender from "./components/Calender";
+import checkRecipientExists from "./services/userValidation";
 
-function App() {
+let recipient = window.location.pathname;
+recipient = recipient.substring(-1);
+
+export default function App() {
+	const [recipientData, updateRecipientData] = useState({
+		isAnyEntry: false,
+		isIdValid: false,
+		response: "No Recipient Selected",
+	});
+	const [recipientId, setRecipientId] = useState("");
+
+	useEffect(() => {
+		const data = checkRecipientExists(recipient);
+		data.then((res) => {
+			updateRecipientData(res);
+		});
+	}, [recipientData.response]);
+
 	return (
 		<div className="container">
 			<header className="w3-container w3-indigo">
-				<h1>Hello World!</h1>
+				<h1>{recipientData.response}</h1>
 			</header>
-			<nav className="w3-dropdown-hover">
-				<button className="w3-button"></button>
-				<Link to="/event-type">View by event type</Link>
-			</nav>
+			<Calender />
 		</div>
 	);
 }
-
-export default App;
