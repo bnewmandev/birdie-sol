@@ -26,6 +26,7 @@ pool.getConnection(async (err, conn) => {
 		fs.writeFile("allprops.json", JSON.stringify(Array.from(allKeys)), (err) => {
 			if (err) throw err;
 			console.log("Done!");
+			conn.release();
 		});
 	});
 });

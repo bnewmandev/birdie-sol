@@ -12,14 +12,14 @@ const pool = createPool({
 
 pool.getConnection(async (err, conn) => {
 	if (err) throw err;
-	conn.query("SELECT event_type FROM events;", (err, res) => {
+	conn.query("SELECT care_recipient_id FROM events;", (err, res) => {
 		let allKeys = new Set();
 		if (err) throw err;
 		res.forEach((element, i) => {
 			if (i % 100) console.log(i + "/" + res.length);
-			allKeys.add(element["event_type"]);
+			allKeys.add(element["care_recipient_id"]);
 		});
-		fs.writeFile("alleventtypes.json", JSON.stringify(Array.from(allKeys)), (err) => {
+		fs.writeFile("allRecipients.json", JSON.stringify(Array.from(allKeys)), (err) => {
 			if (err) throw err;
 			console.log("Done!");
 			conn.release();
