@@ -31,7 +31,14 @@ it("Shows that a valid user is selected when there is a valid id", async () => {
 	});
 });
 
-// it("Fetches and displays calender for recipient with ID 'test'", async () => {
-// 	window.history.pushState("")
-// 	const events = await
-// })
+it("Fetches and displays calender for recipient with ID 'test'", async () => {
+	const href = `${window.origin}/test`;
+	// eslint-disable-next-line no-restricted-globals
+	window.history.replaceState(history.state, "", href);
+
+	render(<App />);
+
+	await waitFor(() => {
+		expect(screen.getByText(/Mood Observation/i)).toHaveClass("rbc-event-content");
+	});
+});
