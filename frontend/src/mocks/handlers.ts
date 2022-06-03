@@ -3,8 +3,9 @@ import data from "./data";
 
 export const handlers = [
 	rest.get("http://localhost/validateUser", (req, res, ctx) => {
+		console.log("VALIDATE USER HAS BEEN CALLED");
 		const recipientId = req.url.searchParams.get("id")!;
-		if (recipientId in data.recipients) {
+		if (data.recipients.includes(recipientId)) {
 			return res(ctx.status(200), ctx.json({ recipientId, code: 200 }));
 		} else {
 			return res(ctx.status(200), ctx.json({ recipientId, code: 404 }));
@@ -12,6 +13,7 @@ export const handlers = [
 	}),
 
 	rest.get("http://localhost/fetchUser", (req, res, ctx) => {
+		console.log("FETCH USER HAS BEEN CALLED");
 		const recipientId = req.url.searchParams.get("id")!;
 		if (recipientId === "test") {
 			return res(
