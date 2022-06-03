@@ -10,4 +10,17 @@ export const handlers = [
 			return res(ctx.status(200), ctx.json({ recipientId, code: 404 }));
 		}
 	}),
+
+	rest.get("http://localhost/fetchUser", (req, res, ctx) => {
+		const recipientId = req.url.searchParams.get("id")!;
+		if (recipientId === "test") {
+			return res(
+				ctx.status(200),
+				ctx.json({
+					events: data.events,
+					lastEventDate: data.events[-1].start.getTime(),
+				})
+			);
+		}
+	}),
 ];
