@@ -2,28 +2,25 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import React from "react";
 
-import { useAppSelector } from "../redux/hooks";
-
 import { selectEvents } from "../redux/events";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import { CalenderEvent } from "../types";
+import { CalendarProps, CalenderEvent } from "../types";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const localizer = momentLocalizer(moment);
 
-export default function Calender() {
-	const dispatch = useDispatch();
+const MyCalendar = ({ date }: CalendarProps) => {
 	const eventArray = useSelector(selectEvents);
 
 	return (
 		<div className="w3-container w3-margin-top">
 			<Calendar
-				data-testid="calender"
 				localizer={localizer}
 				events={eventArray}
+				date={date}
 				startAccessor="start"
 				endAccessor="end"
 				style={{ height: 500 }}
@@ -37,4 +34,10 @@ export default function Calender() {
 			/>
 		</div>
 	);
-}
+};
+
+// MyCalendar.propTypes = {
+// 	date: PropTypes.instanceOf(Date),
+// };
+
+export default MyCalendar;

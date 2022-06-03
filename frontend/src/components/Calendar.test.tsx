@@ -2,7 +2,7 @@ import React from "react";
 
 import { render, fireEvent, screen } from "../utils/testUtils";
 
-import Calender from "./Calender";
+import Calender from "./Calendar";
 import data from "../mocks/data";
 
 it("Fetches and displays Calender", async () => {
