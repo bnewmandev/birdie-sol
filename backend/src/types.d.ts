@@ -1,9 +1,9 @@
 export interface CalenderEvent {
-	id: number | string;
+	id: string;
 	title: string;
 	allDay: boolean;
-	start: Date;
-	end: Date;
+	start: number;
+	end: number;
 	color: string;
 }
 

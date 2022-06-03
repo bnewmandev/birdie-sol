@@ -1,7 +1,27 @@
 import express from "express";
 import pool from "../database";
+import { CalenderEvent } from "../types";
 
 export const fetchUserController = express.Router();
+
+const typeFilter = [
+	"fluid_intake_observation",
+	"physical_health_observation",
+	"mood_observation",
+	"regular_medication_taken",
+	"alert_raised",
+	"no_medication_observation_received",
+	"incontinence_pad_observation",
+	"general_observation",
+	"regular_medication_not_taken",
+	"food_intake_observation",
+	"mental_health_observation",
+	"regular_medication_maybe_taken",
+	"concern_raised",
+	"regular_medication_partially_taken",
+	"catheter_observation",
+	"toilet_visit_recorded",
+];
 
 const colorMap: { [key: string]: string } = {
 	fluid_intake_observation: "blue",
@@ -41,7 +61,7 @@ interface Payload {
 	id: string;
 	visit_id: string;
 	timestamp: string;
-	event_type?: string | undefined;
+	event_type: string;
 	caregiver_id: string;
 	task_instance_id: string;
 	care_recipient_id: string;
@@ -54,18 +74,20 @@ fetchUserController.get("/fetchUser", async (req, res) => {
 		req.query.id,
 		(err, result) => {
 			if (err) return console.log(err);
-			const events = result.map((item: Response) => {
+			const events: CalenderEvent[] = [];
+			result.forEach((item: Response) => {
 				const payload: Payload = JSON.parse(item.payload);
-				let title: string = (payload.event_type || "None").replace(/_/g, " ");
+				if (!typeFilter.includes(payload.event_type)) return;
+				let title: string = payload.event_type.replace(/_/g, " ");
 
-				return {
+				events.push({
 					id: payload.id,
 					title: title.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()),
 					allDay: false,
 					start: item.time,
 					end: item.time,
 					color: colorMap[payload.event_type || "black"],
-				};
+				});
 			});
 			res.json({
 				events: events,

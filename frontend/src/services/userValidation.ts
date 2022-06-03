@@ -2,7 +2,7 @@ import axios from "axios";
 import { ValidateUserResponse } from "../types";
 
 const userValidation = async (recipientId: string): Promise<ValidateUserResponse> => {
-	if (recipientId.length === 0) {
+	if (recipientId.length <= 1) {
 		return new Promise<ValidateUserResponse>((res, rej) => {
 			res({
 				isAnyEntry: false,

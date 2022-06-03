@@ -11,8 +11,14 @@ const fetchEvents = async (recipientId: string) => {
 	const eventsData = await axios.get(request, { params: { recipientId } }); // TODO Implement route to fetch events data
 
 	if (eventsData.status === 200) {
+		const events = eventsData.data.events as Array<any>;
+		const eventsWithUpdatedTimes: CalenderEvent[] = events.map((event) => ({
+			...event,
+			start: new Date(event.start),
+			end: new Date(event.start),
+		}));
 		return {
-			events: eventsData.data.events as CalenderEvent[],
+			events: eventsWithUpdatedTimes,
 			lastEventDate: new Date(eventsData.data.lastEventDate),
 		};
 	} else {

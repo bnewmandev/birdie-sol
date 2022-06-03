@@ -20,7 +20,7 @@ const MyCalendar = ({ defaultDate, events = [] }: CalendarProps) => {
 			<Calendar
 				localizer={localizer}
 				events={events}
-				defaultDate={defaultDate}
+				date={defaultDate}
 				startAccessor="start"
 				endAccessor="end"
 				style={{ height: "90vh" }}
