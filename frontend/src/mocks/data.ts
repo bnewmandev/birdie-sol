@@ -41,6 +41,14 @@ const data = {
 		"ad3512a6-91b1-4d7d-a005-6f8764dd0111",
 		"test",
 	],
+	visits: {
+		"2ddc3653-521f-11e9-b63f-06a80bfbb33e": 1556176245898,
+		"2ddc37a6-521f-11e9-b63f-06a80bfbb33e": 1557386688854,
+		"2ddc3ca7-521f-11e9-b63f-06a80bfbb33e": 1557473264242,
+		"2ddc6ee4-521f-11e9-b63f-06a80bfbb33e": 1556106903525,
+		"2ddc72c1-521f-11e9-b63f-06a80bfbb33e": 1556191402283,
+		"2ddc7412-521f-11e9-b63f-06a80bfbb33e": 1557401180823,
+	},
 };
 
 export default data;

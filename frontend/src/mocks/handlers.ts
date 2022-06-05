@@ -31,4 +31,13 @@ export const handlers = [
 			);
 		}
 	}),
+
+	rest.get("http://localhost/visits", (req, res, ctx) => {
+		const recipientId = req.url.searchParams.get("id")!;
+		if (recipientId === "test") {
+			return res(ctx.status(200), ctx.json({ visits: data.visits }));
+		} else {
+			return res(ctx.status(404));
+		}
+	}),
 ];
