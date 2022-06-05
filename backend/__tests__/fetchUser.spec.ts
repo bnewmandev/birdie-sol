@@ -8,12 +8,12 @@ describe("Fetch User Controller", () => {
 			.expect(200)
 			.expect((res) => {
 				expect(res.body.events[0]).toEqual({
-					id: "31c03a75-01bd-4f8c-8a0a-bc343adb622e",
-					title: "Regular Medication Taken",
+					id: "2b234dfa-86d8-403a-bd2d-ad1a3499114c",
+					title: "Mental Health Observation",
 					allDay: false,
-					start: 1557689407000,
-					end: 1557689407000,
-					color: "blue",
+					start: 1557687185099,
+					end: 1557687185099,
+					color: "purple",
 				});
 				expect(res.body.lastEventDate).toEqual(1557689407000);
 			});
