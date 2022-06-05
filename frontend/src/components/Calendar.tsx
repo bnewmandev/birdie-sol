@@ -14,13 +14,12 @@ const localizer = momentLocalizer(moment);
 
 const MyCalendar = ({ defaultDate, events = [] }: CalendarProps) => {
 	// const eventArray = useSelector(selectEvents);
-
 	return (
 		<div className="w3-container w3-margin-top">
 			<Calendar
 				localizer={localizer}
 				events={events}
-				date={defaultDate}
+				defaultDate={new Date("2019-05-12")}
 				startAccessor="start"
 				endAccessor="end"
 				style={{ height: "90vh" }}
@@ -31,6 +30,8 @@ const MyCalendar = ({ defaultDate, events = [] }: CalendarProps) => {
 					isSelected,
 					style: { backgroundColor: event.color },
 				})}
+				defaultView="agenda"
+				length={7}
 			/>
 		</div>
 	);

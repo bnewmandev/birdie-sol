@@ -5,31 +5,21 @@ import { CalenderEvent } from "../types";
 export const fetchUserController = express.Router();
 
 const typeFilter = [
-	"fluid_intake_observation",
-	"physical_health_observation",
 	"mood_observation",
-	"regular_medication_taken",
 	"alert_raised",
-	"no_medication_observation_received",
-	"incontinence_pad_observation",
 	"general_observation",
-	"regular_medication_not_taken",
-	"food_intake_observation",
 	"mental_health_observation",
-	"regular_medication_maybe_taken",
 	"concern_raised",
-	"regular_medication_partially_taken",
-	"catheter_observation",
-	"toilet_visit_recorded",
+	"physical_health_observation",
 ];
 
 const colorMap: { [key: string]: string } = {
 	fluid_intake_observation: "blue",
 	task_completed: "white",
-	physical_health_observation: "green",
+	physical_health_observation: "turquoise",
 	visit_completed: "white",
 	check_out: "white",
-	mood_observation: "green",
+	mood_observation: "blue",
 	regular_medication_taken: "blue",
 	alert_raised: "red",
 	no_medication_observation_received: "blue",
@@ -39,7 +29,7 @@ const colorMap: { [key: string]: string } = {
 	regular_medication_not_taken: "blue",
 	food_intake_observation: "blue",
 	task_completion_reverted: "white",
-	mental_health_observation: "green",
+	mental_health_observation: "purple",
 	medication_schedule_updated: "white",
 	visit_cancelled: "white",
 	regular_medication_maybe_taken: "blue",

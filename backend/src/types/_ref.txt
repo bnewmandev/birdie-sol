@@ -1,0 +1,5 @@
+visit_id + caregiver_id = ObservationEvent
+task_instance_id (+ visit_id? + caregiver_id?) = TaskState
+alert_id = Alert
+caregiver_id + care_recipient_id = ScheduleEvent
+care_recipient_id = MedicationEvent
