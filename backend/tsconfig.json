@@ -20,6 +20,6 @@
 		"esModuleInterop": true,
 		"types": ["jest"]
 	},
-	"include": ["src/**/*", "**/*.spec.ts", "utils/uuidTools.ts"],
+	"include": ["src/**/*", "**/*.spec.ts", "tools/uuidTools.ts"],
 	"exclude": ["node_modules"]
 }
