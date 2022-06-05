@@ -2,6 +2,7 @@ import express from "express";
 import { pingController } from "./controllers/ping";
 import { validateUserController } from "./controllers/validateUser";
 import { fetchUserController } from "./controllers/fetchUser";
+import { visitController } from "./controllers/visit";
 
 import dotenv from "dotenv";
 
@@ -18,5 +19,6 @@ app.use((_, res, next) => {
 app.use(pingController);
 app.use(validateUserController);
 app.use(fetchUserController);
+app.use(visitController);
 
 export default app;
