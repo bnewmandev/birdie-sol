@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./App.scss";
 
 import Calender from "./components/Calendar";
-import fetchEvents from "./services/fetchEvents";
+import { fetchVisits } from "./services/fetchEvents";
 import userValidation from "./services/userValidation";
 import { CalenderEvent } from "./types";
 
@@ -22,9 +22,8 @@ export default function App() {
 			.then((res) => {
 				updateRecipientData(res);
 				if (res.isIdValid) {
-					fetchEvents(recipient).then((res) => {
-						setEvents(res.events);
-						setDate(res.lastEventDate);
+					fetchVisits(recipient).then((res) => {
+						setEvents(res);
 					});
 				}
 			})

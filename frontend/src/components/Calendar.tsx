@@ -2,8 +2,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import React from "react";
 
-import { selectEvents } from "../redux/events";
-
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { CalendarProps, CalenderEvent } from "../types";
@@ -30,8 +28,12 @@ const MyCalendar = ({ defaultDate, events = [] }: CalendarProps) => {
 					isSelected,
 					style: { backgroundColor: event.color },
 				})}
-				defaultView="agenda"
+				defaultView="month"
+				views={["month", "day", "week"]}
 				length={7}
+				onSelectEvent={(e) => {
+					console.log(e);
+				}}
 			/>
 		</div>
 	);
