@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+    backend:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./backend
+        env_file:
+            - .env
+        container_name: birdie-backend_c
+        volumes:
+            - /app/node_modules
+            - ./backend:/app
+    frontend:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./frontend
+        container_name: birdie-frontend_c
+        stdin_open: true
+        volumes:
+            - /app/node_modules
+            - ./frontend:/app
+    nginx:
+        restart: always
+        depends_on:
+            - frontend
+            - backend
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./nginx
+        ports:
+            - "8080:80"

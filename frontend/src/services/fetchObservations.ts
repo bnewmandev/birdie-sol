@@ -3,10 +3,7 @@ import { ObservationEvent } from "../types/ObservationEvent";
 import { TaskState } from "../types/TaskState";
 
 export const fetchObservations = async (visitId: string) => {
-	let request = `/visit?id=${visitId}`;
-	if (process.env.NODE_ENV === "development") {
-		request = `http://localhost:8000/visit?id=${visitId}`;
-	}
+	let request = `/api/visit?id=${visitId}`;
 
 	const visitData = await axios.get(request);
 

@@ -1,25 +1,16 @@
 {
 	"compilerOptions": {
-		"declaration": true,
-		"module": "CommonJS",
 		"moduleResolution": "Node",
-		"lib": ["ESNext"],
-		"target": "ES2015",
-		"outDir": "./lib",
-		"removeComments": true,
-		"inlineSourceMap": true,
-		"inlineSources": true,
-		"preserveConstEnums": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
+		"module": "CommonJS",
+		"target": "esnext",
 		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
+		"isolatedModules": true,
 		"esModuleInterop": true,
-		"types": ["jest"]
+		"types": ["jest"],
+		"sourceMap": true,
+		"declaration": true,
+		"outDir": "./build"
 	},
-	"include": ["src/**/*", "**/*.spec.ts", "tools/uuidTools.ts"],
-	"exclude": ["node_modules"]
+	"exclude": ["*.spec.ts"],
+	"include": ["./src/**/*"]
 }

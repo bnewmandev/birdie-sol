@@ -2,7 +2,7 @@ import { rest } from "msw";
 import data from "./data";
 
 export const handlers = [
-	rest.get("http://localhost/validateUser", (req, res, ctx) => {
+	rest.get("/api/validateUser", (req, res, ctx) => {
 		const recipientId = req.url.searchParams.get("id")!;
 		if (data.recipients.includes(recipientId)) {
 			return res(ctx.status(200), ctx.json({ recipientId, code: 200 }));
@@ -11,7 +11,7 @@ export const handlers = [
 		}
 	}),
 
-	rest.get("http://localhost/fetchUser", (req, res, ctx) => {
+	rest.get("/api/fetchUser", (req, res, ctx) => {
 		const recipientId = req.url.searchParams.get("id")!;
 		if (recipientId === "df50cac5-293c-490d-a06c-ee26796f850d") {
 			return res(
@@ -32,7 +32,7 @@ export const handlers = [
 		}
 	}),
 
-	rest.get("http://localhost/visits", (req, res, ctx) => {
+	rest.get("/api/visits", (req, res, ctx) => {
 		const recipientId = req.url.searchParams.get("id")!;
 		if (recipientId === "df50cac5-293c-490d-a06c-ee26796f850d") {
 			return res(ctx.status(200), ctx.json({ visits: data.visits }));
@@ -41,7 +41,7 @@ export const handlers = [
 		}
 	}),
 
-	rest.get("http://localhost/visit", (req, res, ctx) => {
+	rest.get("/api/visit", (req, res, ctx) => {
 		const recipientId = req.url.searchParams.get("id")!;
 		if (recipientId === "df50cac5-293c-490d-a06c-ee26796f850d") {
 			const result: any[] = [];

@@ -12,10 +12,7 @@ const userValidation = async (id: string): Promise<ValidateUserResponse> => {
 			});
 		});
 	}
-	let request = `/validateUser?id=${id}`;
-	if (process.env.NODE_ENV === "development") {
-		request = `http://localhost:8000/validateUser?id=${id}`;
-	}
+	let request = `/api/validateUser?id=${id}`;
 
 	const recipientData = await axios.get(request);
 

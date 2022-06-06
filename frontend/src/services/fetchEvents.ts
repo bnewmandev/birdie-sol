@@ -3,10 +3,7 @@ import { CalenderEvent } from "../types";
 
 export const fetchEvents = async (recipientId: string) => {
 	let id = recipientId.substring(1);
-	let request = `/fetchUser?id=${id}`;
-	if (process.env.NODE_ENV === "development") {
-		request = `http://localhost:8000/fetchUser?id=${id}`;
-	}
+	let request = `/api/fetchUser?id=${id}`;
 
 	const eventsData = await axios.get(request, { params: { recipientId } });
 
@@ -30,10 +27,7 @@ export const fetchEvents = async (recipientId: string) => {
 };
 
 export const fetchVisits = async (id: string) => {
-	let request = `/visits?id=${id}`;
-	if (process.env.NODE_ENV === "development") {
-		request = `http://localhost:8000/visits?id=${id}`;
-	}
+	let request = `/api/visits?id=${id}`;
 
 	const visitData = await axios.get(request);
 

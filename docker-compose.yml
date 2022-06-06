@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+    backend:
+        build:
+            dockerfile: Dockerfile
+            context: ./backend
+        env_file:
+            - .env
+        container_name: birdie-backend_c
+    frontend:
+        build:
+            dockerfile: Dockerfile
+            context: ./frontend
+        container_name: birdie-frontend_c
+    nginx:
+        restart: always
+        depends_on:
+            - frontend
+            - backend
+        build:
+            dockerfile: Dockerfile
+            context: ./nginx
+        ports:
+            - "80:80"
+            - "443:443"

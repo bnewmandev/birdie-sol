@@ -1,0 +1,63 @@
+version: "3"
+
+services:
+    server:
+        build: ./backend
+        expose:
+            - ${APP_SERVER_PORT}
+        environment:
+            - DB_HOST: ${DB_HOST}
+            - DB_PORT: ${DB_PORT}
+            - DB_USER: ${DB_USER}
+            - DB_PWORD: ${DB_PWORD}
+            - DB_NAME: ${DB_NAME}
+            - APP_SERVER_PORT: ${APP_SERVER_PORT}
+        ports:
+            - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+        volumes:
+            - ./backend/src:/srv/app/birdie-server/src
+        command: yarn dev
+    client:
+        build: ./frontend
+        environment:
+            - REACT_APP_PORT=${REACT_APP_PORT}
+        expose:
+            - ${REACT_APP_PORT}
+        ports:
+            - ${REACT_APP_PORT}:${REACT_APP_PORT}
+        volumes:
+            - ./frontend/src:/srv/app/birdie-client/src
+            - ./frontend/public:/srv/app/birdie-client/public
+        links:
+            - server
+        command: yarn start
+
+
+version: "3.8"
+services:
+    backend:
+        build: ./backend
+        container_name: birdie-backend_c
+        environment:
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_USER=${DB_USER}
+            - DB_PWORD=${DB_PWORD}
+            - DB_NAME=${DB_NAME}
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./backend:/app
+            - /app/node_modules
+    frontend:
+        build:
+            context: ./frontend
+            target: base
+        container_name: birdie-frontend_c
+        command: yarn start
+        stdin_open: true
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
