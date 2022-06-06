@@ -6,7 +6,6 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { CalendarProps, CalenderEvent } from "../types";
 
-import { useSelector } from "react-redux";
 import EventModal from "./EventModal";
 
 const localizer = momentLocalizer(moment);

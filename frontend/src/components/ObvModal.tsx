@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ObservationEventPayload } from "../types/ObservationEvent";
 import { TaskStatePayload } from "../types/TaskState";
 import ReactDOM from "react-dom";
