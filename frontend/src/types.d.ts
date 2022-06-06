@@ -1,5 +1,5 @@
 export interface CalenderEvent {
-	id: number | string;
+	id: string;
 	title: string;
 	allDay: boolean;
 	start: Date;
@@ -20,6 +20,7 @@ export interface ValidateUserResponse {
 	isAnyEntry: boolean;
 	isIdValid: boolean;
 	response: string;
+	id: string;
 }
 
 export interface CalendarProps {

@@ -7,6 +7,7 @@ import moment from "moment";
 import { CalendarProps, CalenderEvent } from "../types";
 
 import { useSelector } from "react-redux";
+import EventModal from "./EventModal";
 
 const localizer = momentLocalizer(moment);
 
@@ -32,9 +33,15 @@ const MyCalendar = ({ defaultDate, events = [] }: CalendarProps) => {
 				views={["month", "day", "week"]}
 				length={7}
 				onSelectEvent={(e) => {
-					console.log(e);
+					const elem = document.getElementById(e.id)!;
+					elem.style.zIndex = "10";
+					elem.style.display = "block";
+					document.body.classList.add("modal-open");
 				}}
 			/>
+			{events.map((visit) => (
+				<EventModal key={"k" + visit.id} event_meta={visit} />
+			))}
 		</div>
 	);
 };

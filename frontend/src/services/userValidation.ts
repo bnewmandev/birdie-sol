@@ -1,17 +1,17 @@
 import axios from "axios";
 import { ValidateUserResponse } from "../types";
 
-const userValidation = async (recipientId: string): Promise<ValidateUserResponse> => {
-	if (recipientId.length <= 1) {
+const userValidation = async (id: string): Promise<ValidateUserResponse> => {
+	if (id.length <= 1) {
 		return new Promise<ValidateUserResponse>((res, rej) => {
 			res({
 				isAnyEntry: false,
 				isIdValid: false,
 				response: "No Recipient Selected",
+				id: "",
 			});
 		});
 	}
-	let id = recipientId.substring(1);
 	let request = `/validateUser?id=${id}`;
 	if (process.env.NODE_ENV === "development") {
 		request = `http://localhost:8000/validateUser?id=${id}`;
@@ -24,6 +24,7 @@ const userValidation = async (recipientId: string): Promise<ValidateUserResponse
 			isAnyEntry: true,
 			isIdValid: true,
 			response: "Recipient: " + recipientData.data.recipientId,
+			id: id,
 		};
 	} else if (recipientData.data.code === 404) {
 		return new Promise<ValidateUserResponse>((res, rej) => {
@@ -31,6 +32,7 @@ const userValidation = async (recipientId: string): Promise<ValidateUserResponse
 				isAnyEntry: true,
 				isIdValid: false,
 				response: "Invalid Recipient ID",
+				id: "",
 			});
 		});
 	} else {
@@ -39,6 +41,7 @@ const userValidation = async (recipientId: string): Promise<ValidateUserResponse
 				isAnyEntry: false,
 				isIdValid: false,
 				response: "Internal Server Error",
+				id: "",
 			});
 		});
 	}

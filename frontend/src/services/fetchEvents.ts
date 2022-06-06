@@ -29,14 +29,13 @@ export const fetchEvents = async (recipientId: string) => {
 	}
 };
 
-export const fetchVisits = async (recipientId: string) => {
-	let id = recipientId.substring(1);
+export const fetchVisits = async (id: string) => {
 	let request = `/visits?id=${id}`;
 	if (process.env.NODE_ENV === "development") {
 		request = `http://localhost:8000/visits?id=${id}`;
 	}
 
-	const visitData = await axios.get(request, { params: { recipientId } });
+	const visitData = await axios.get(request);
 
 	if (visitData.status === 200) {
 		let visitsList: CalenderEvent[] = [];
@@ -47,7 +46,7 @@ export const fetchVisits = async (recipientId: string) => {
 				start: new Date(value[0]),
 				end: new Date(value[0]),
 				id: key,
-				title: "Visit by " + value[1],
+				title: "Visit at " + new Date(value[0]).toLocaleTimeString("en-uk", { timeStyle: "short" }),
 			});
 		}
 		return visitsList;

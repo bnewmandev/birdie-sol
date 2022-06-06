@@ -13,7 +13,7 @@ export const handlers = [
 
 	rest.get("http://localhost/fetchUser", (req, res, ctx) => {
 		const recipientId = req.url.searchParams.get("id")!;
-		if (recipientId === "test") {
+		if (recipientId === "df50cac5-293c-490d-a06c-ee26796f850d") {
 			return res(
 				ctx.status(200),
 				ctx.json({
@@ -34,8 +34,23 @@ export const handlers = [
 
 	rest.get("http://localhost/visits", (req, res, ctx) => {
 		const recipientId = req.url.searchParams.get("id")!;
-		if (recipientId === "test") {
+		if (recipientId === "df50cac5-293c-490d-a06c-ee26796f850d") {
 			return res(ctx.status(200), ctx.json({ visits: data.visits }));
+		} else {
+			return res(ctx.status(404));
+		}
+	}),
+
+	rest.get("http://localhost/visit", (req, res, ctx) => {
+		const recipientId = req.url.searchParams.get("id")!;
+		if (recipientId === "df50cac5-293c-490d-a06c-ee26796f850d") {
+			const result: any[] = [];
+			data.eventData.forEach((item) => {
+				const payload = JSON.parse(item.payload);
+				result.push({ ...item, payload });
+			});
+
+			return res(ctx.status(200), ctx.json({ events: result }));
 		} else {
 			return res(ctx.status(404));
 		}

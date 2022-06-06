@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, fireEvent, screen } from "../utils/testUtils";
+import { render, fireEvent, screen } from "@testing-library/react";
 
 import Calender from "./Calendar";
 import data from "../mocks/data";
@@ -15,6 +15,7 @@ it("Fetches and displays Calender with 1 event", async () => {
 	const event1 = data.events[0];
 	render(<Calender events={[event1]} defaultDate={new Date(Date.parse("2022-06-01"))} />);
 	expect(screen.getByText(/Mood Observation/i)).toHaveClass("rbc-event-content");
+	// eslint-disable-next-line testing-library/no-node-access
 	expect(screen.getByText(/Mood Observation/i).parentElement).toHaveStyle("background-color: blue;");
 });
 
