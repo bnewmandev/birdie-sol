@@ -8,13 +8,13 @@ fi
 domains=(dev.bndev.co.uk)
 rsa_key_size=4096
 data_path="./data/certbot"
-email="benewman2002@gmail.com"
-staging=0
+email="benewman2002@gmail.com" # Adding a valid address is strongly recommended
+staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 if [ -d "$data_path" ]; then
   read -p "Existing data found for $domains. Continue and replace existing certificate? (y/N) " decision
   if [ "$decision" != "Y" ] && [ "$decision" != "y" ]; then
-	exit
+    exit
   fi
 fi
 
@@ -32,9 +32,9 @@ path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
 docker-compose run --rm --entrypoint "\
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
-	-keyout '$path/privkey.pem' \
-	-out '$path/fullchain.pem' \
-	-subj '/CN=localhost'" certbot
+    -keyout '$path/privkey.pem' \
+    -out '$path/fullchain.pem' \
+    -subj '/CN=localhost'" certbot
 echo
 
 
@@ -68,12 +68,12 @@ if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
 docker-compose run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
-	$staging_arg \
-	$email_arg \
-	$domain_args \
-	--rsa-key-size $rsa_key_size \
-	--agree-tos \
-	--force-renewal" certbot
+    $staging_arg \
+    $email_arg \
+    $domain_args \
+    --rsa-key-size $rsa_key_size \
+    --agree-tos \
+    --force-renewal" certbot
 echo
 
 echo "### Reloading nginx ..."
