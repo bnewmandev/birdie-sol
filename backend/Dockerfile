@@ -12,5 +12,6 @@ WORKDIR /app
 COPY --from=ts-compiler /app/package.json .
 COPY --from=ts-compiler /app/build .
 RUN yarn install --prod
+EXPOSE 8000
 
 CMD [ "yarn", "start" ]
